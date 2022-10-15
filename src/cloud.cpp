@@ -830,7 +830,10 @@ void Cloud::ResetMessage() {
             msgChar.line = 0xFFFF;
             msgChar.col = 0xFFFF;
         }
-        if (col == lastCol) {
+        if (charsRemaining > 1 && _message[_message.size() - charsRemaining].val != ' ') {
+            col++;
+        }
+        else if (col == lastCol || col > lastCol) {
             line++;
             col = firstCol;
             if (charsRemaining < charsPerCol) {
